@@ -63,9 +63,9 @@ class Annotation extends AbstractAnnotationDriver
             // translatable property
             if ($translatable = $this->reader->getPropertyAnnotation($property, self::TRANSLATABLE)) {
                 $field = $property->getName();
-                if (!$meta->hasField($field)) {
-                    throw new InvalidMappingException("Unable to find translatable [{$field}] as mapped property in entity - {$meta->name}");
-                }
+//                if (!$meta->hasField($field)) {
+//                    throw new InvalidMappingException("Unable to find translatable [{$field}] as mapped property in entity - {$meta->name}");
+//                }
                 // fields cannot be overrided and throws mapping exception
                 $config['fields'][] = $field;
                 if (isset($translatable->fallback)) {

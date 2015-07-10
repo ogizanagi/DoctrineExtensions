@@ -212,8 +212,7 @@ final class ORM extends BaseAdapterORM implements TranslatableAdapter
     {
         $em = $this->getObjectManager();
         $wrapped = AbstractWrapper::wrap($object, $em);
-        $meta = $wrapped->getMetadata();
-        $type = Type::getType($meta->getTypeOfField($field));
+        $type = Type::getType('text');
         if ($value === false) {
             $value = $wrapped->getPropertyValue($field);
         }
@@ -228,8 +227,7 @@ final class ORM extends BaseAdapterORM implements TranslatableAdapter
     {
         $em = $this->getObjectManager();
         $wrapped = AbstractWrapper::wrap($object, $em);
-        $meta = $wrapped->getMetadata();
-        $type = Type::getType($meta->getTypeOfField($field));
+        $type = Type::getType('text');
         $value = $type->convertToPHPValue($value, $em->getConnection()->getDatabasePlatform());
         $wrapped->setPropertyValue($field, $value);
     }

@@ -48,7 +48,11 @@ class EntityWrapper extends AbstractWrapper
     {
         $this->initialize();
 
-        return $this->meta->getReflectionProperty($property)->getValue($this->object);
+        if (isset($this->meta->reflFields[$property])) {
+            return $this->meta->getReflectionProperty($property)->getValue($this->object);
+        }
+
+        return $this->object->{'get'.ucfirst($property)}();
     }
 
     /**
@@ -57,7 +61,12 @@ class EntityWrapper extends AbstractWrapper
     public function setPropertyValue($property, $value)
     {
         $this->initialize();
-        $this->meta->getReflectionProperty($property)->setValue($this->object, $value);
+
+        if (isset($this->meta->reflFields[$property])) {
+            $this->meta->getReflectionProperty($property)->setValue($this->object, $value);
+        } else {
+            $this->object->{'set'.ucfirst($property)}($value);
+        }
 
         return $this;
     }
